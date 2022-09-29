@@ -91,9 +91,11 @@ public class Order  {
         orderCanceled.publishAfterCommit();
 
         // Get request from Product
-        //team.external.Product product =
-        //    Application.applicationContext.getBean(team.external.ProductService.class)
-        //    .getProduct(/** mapping value needed */);
+        team.external.Product product =
+           OrderApplication.applicationContext.getBean(team.external.ProductService.class)
+           .getProduct(getProductId().longValue());
+
+        if(product.getQty() < getQty()) throw new RuntimeException("Out of stock!");
 
     }
 
